@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -39,17 +40,24 @@ public class UserInput extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
 
+        HttpSession session = request.getSession();
+
+        session.setAttribute("Name", name);
+        session.setAttribute("Email", email);
+
+        response.sendRedirect("get-user-info");
+
         // Set content type to text/html
-        response.setContentType("text/html");
-
-        // Get PrintWriter to write the response
-        PrintWriter out = response.getWriter();
-
-        // Display the submitted user details
-        out.println("<html><body>");
-        out.println("<h1>Received Information</h1>");
-        out.println("<p>Name: " + name + "</p>");
-        out.println("<p>Email: " + email + "</p>");
-        out.println("</body></html>");
+//        response.setContentType("text/html");
+//
+//        // Get PrintWriter to write the response
+//        PrintWriter out = response.getWriter();
+//
+//        // Display the submitted user details
+//        out.println("<html><body>");
+//        out.println("<h1>Received Information</h1>");
+//        out.println("<p>Name: " + name + "</p>");
+//        out.println("<p>Email: " + email + "</p>");
+//        out.println("</body></html>");
     }
 }
